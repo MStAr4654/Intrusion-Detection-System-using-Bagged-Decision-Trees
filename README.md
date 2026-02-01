@@ -32,172 +32,212 @@ Oracle VirtualBox	7.x
 Ubuntu (VM)	Ubuntu 20.04 LTS or later
 
 
-🛠️ Step 1: Install MATLAB
+# Step 1: Install MATLAB
 
-Download MATLAB from: https://www.mathworks.com
+* Download MATLAB from: https://www.mathworks.com
 
-During installation, ensure the following toolboxes are installed:
+* During installation, ensure the following toolboxes are installed:
 
-Statistics and Machine Learning Toolbox
+* Statistics and Machine Learning Toolbox
 
-Signal Processing Toolbox (recommended)
-
-
-🛠️ Step 2: Install VirtualBox & Ubuntu
-
-Download Oracle VirtualBox
-
-Download Ubuntu ISO (20.04 LTS recommended)
-
-Create a new VM:
-
-Type: Linux
-
-Version: Ubuntu (64-bit)
-
-RAM: ≥ 4 GB
-
-Network Adapter: NAT
-
-Install Ubuntu inside the VM
-
-Ensure internet connectivity inside Ubuntu
+* Signal Processing Toolbox (recommended)
 
 
-🛠️ Step 3: Install Wireshark
+# Step 2: Install VirtualBox & Ubuntu
+
+* Download Oracle VirtualBox
+
+* Download Ubuntu ISO (20.04 LTS recommended)
+
+* Now create a new VM with the following specifications:
+
+1. Type: Linux
+
+2. Version: Ubuntu (64-bit)
+
+3. RAM: ≥ 4 GB
+
+4. Network Adapter: NAT
+
+5. Install Ubuntu inside the VM
+
+6.Ensure internet connectivity inside Ubuntu
+
+
+# Step 3: Install Wireshark
 On Host (macOS / Windows)
 
-Download Wireshark from: https://www.wireshark.org
+* Download Wireshark from: https://www.wireshark.org
 
-During installation, allow:
+* During installation, allow:
 
-Packet capture permissions
+* Packet capture permissions
 
-Network interface access
+* Network interface access
 
-After installing the 
-On Ubuntu (optional)
+* After installing the Wireshark, run it
+
+[Optional] On Ubuntu
+
+```
 sudo apt update
 sudo apt install wireshark
+```
 
-📂 Step 4: Clone the GitHub Repository
+# Step 4: Clone the GitHub Repository
+```
 git clone https://github.com/MStAr4654/Intrusion-Detection-System-using-Bagged-Decision-Trees.git
 cd Intrusion-Detection-System-using-Bagged-Decision-Trees
+```
 
-📊 Step 5: Understanding Repository Structure
+# Step 5: Understanding Repository Structure
+
 │── Dataset_NSL-KDD.zip        → Training dataset
+
 │── IDS_Trainer.m              → Model training script
+
 │── IDS_Model.mat              → Saved trained ML model
+
 │── IDS_Normalization.mat      → Feature normalization parameters
+
 │── IDS_Model_Comparison.m     → Model performance evaluation
+
 │── LiveDetect_HostCapture.m   → Live / PCAP-based intrusion detection
+
 │── X_test.mat                 → Test feature data
+
 │── PCAP_Files.zip             → Network traffic samples
+
 │── IDS_block_diagram.png      → System architecture diagram
+
 │── README.md                  → Project documentation
 
-🧪 Step 6: Train the Intrusion Detection Model
 
-Extract Dataset_NSL-KDD.zip
+# Step 6: Train the Intrusion Detection Model
 
-Open MATLAB and set the project folder as the Current Folder
+* Extract Dataset_NSL-KDD.zip
 
-Run:
+* Open MATLAB and set the project folder as the Current Folder
 
-IDS_Trainer
+* Run:
+```
+IDS_Trainer.m
+```
+
+This script will:
+
+* Load the NSL-KDD dataset
+
+* Preprocesses and normalizes features
+
+* Trains a Bagged Decision Tree classifier
+
+* And finally saves the trained model as: ***IDS_Model.mat***
 
 
-This script:
-
-Loads NSL-KDD dataset
-
-Preprocesses and normalizes features
-
-Trains a Bagged Decision Tree classifier
-
-Saves:
-
-IDS_Model.mat
-
-IDS_Normalization.mat
-
-📈 Step 7: Evaluate Model Performance
+# Step 7: Evaluation of Model Performance
 
 Run:
+```
+IDS_Model_Comparison.m
+```
 
-IDS_Model_Comparison
+This script will:
+
+* Test the trained model on unseen data
+
+* Generate accuracy metrics and comparisons
+
+* Helps validate IDS effectiveness
 
 
-This script:
+_Note: This step is crucial to know the IP address of your test subject i.e. the Ubuntu VM_
 
-Tests the trained model on unseen data
+You can verify the connection using the command
 
-Generates accuracy metrics and comparisons
+For the Host Machine
+```
+ifconfig (for Mac)
+ipconfig (for Windows)
+```
 
-Helps validate IDS effectiveness
+For the Ubuntu on VirtualBox
+```
+hostname -I (IP Address of the network)
+```
 
-🌐 Step 8: Capture Network Traffic (PCAP Files)
-Option A: Live Capture using Wireshark
+You need to match the IP Addresses in both the terminals / cmd windows in order to find 
+the network name to be used in the command ***tcpreplay***
 
-Start Wireshark on host machine
 
-Select the network interface connected to VirtualBox
+# Step 8: Capture Network Traffic (PCAP Files)
+***Option A: Live Capture using Wireshark***
 
-Start capturing packets
+* Start Wireshark on host machine (Your Mac / Windows / Linux)
 
-Perform actions inside Ubuntu VM:
+* Select the network interface connected to VirtualBox
 
-Web browsing
+* Start capturing packets
 
-File downloads
+Perform certain actions inside Ubuntu VM such as:
 
-Network scans (for testing)
+* Web browsing
 
-Stop capture and save as .pcap
+* File downloads
 
-Option B: Use Provided PCAP Files
+* Network scans (for testing)
 
-Extract PCAP_Files.zip
+Now, stop capture on Wireshark and save as .pcap
 
-Use pre-captured traffic for simulation
+***Option B: Use Provided PCAP Files***
 
-🚨 Step 9: Run Intrusion Detection on PCAP / Live Traffic
+* Extract PCAP_Files.zip
 
-Open MATLAB
+* Use pre-captured traffic for simulation
+
+# Run Intrusion Detection on PCAP / Live Traffic
+
+* Open MATLAB
 
 Run:
+```
+LiveDetect_HostCapture.m
+```
 
-LiveDetect_HostCapture
+This script will:
+
+* Read packet capture data
+
+* Extracts relevant network features
+
+* Applies normalization
+
+* Uses the trained model for classification
+
+# Outputs:
+
+A graph where it will show if the packets captured are:
+
+1. Normal Traffic --> 0 (on the graph)
+
+2. Intrusion Detected --> 1 (on the graph)
 
 
-This script:
 
-Reads packet capture data
 
-Extracts relevant network features
+## System Workflow Summary
 
-Applies normalization
+* NSL-KDD dataset → Model training
 
-Uses the trained model for classification
+* Model saved for reuse
 
-Outputs:
+* Network traffic captured via Wireshark
 
-Normal Traffic
+* Features extracted from PCAP files
 
-Intrusion Detected
+* ML model classifies traffic in real time or offline
 
-🧠 Step 10: System Workflow Summary
+* Intrusion alerts generated
 
-NSL-KDD dataset → Model training
+<img width="167" height="153" alt="IDS_block_diagram" src="https://github.com/user-attachments/assets/d31be3b9-2953-49a3-af5e-b715ace762cd" />
 
-Model saved for reuse
-
-Network traffic captured via Wireshark
-
-Features extracted from PCAP files
-
-ML model classifies traffic in real time or offline
-
-Intrusion alerts generated
-
-(Refer to IDS_block_diagram.png for visual representation.)
