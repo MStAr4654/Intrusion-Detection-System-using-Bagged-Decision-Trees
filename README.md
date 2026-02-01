@@ -227,17 +227,6 @@ A graph where it will show if the packets captured are:
 
 ## System Workflow Summary
 
-* NSL-KDD dataset → Model training
-
-* Model saved for reuse
-
-* Network traffic captured via Wireshark
-
-* Features extracted from PCAP files
-
-* ML model classifies traffic in real time or offline
-
-* Intrusion alerts generated
-
-<img width="167" height="153" alt="IDS_block_diagram" src="https://github.com/user-attachments/assets/d31be3b9-2953-49a3-af5e-b715ace762cd" />
-
+<p align = "center">
+<img width="350" height="367" alt="IDS_block_diagram" src="https://github.com/user-attachments/assets/d31be3b9-2953-49a3-af5e-b715ace762cd" />
+</p>
