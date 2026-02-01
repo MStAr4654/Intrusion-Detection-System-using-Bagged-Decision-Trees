@@ -1,5 +1,5 @@
-## Intrusion Detection System using Bagged Decision Trees
-# 📌 Project Overview
+# Intrusion Detection System using Bagged Decision Trees
+## 📌 Project Overview
 
 This project implements a Machine Learning–based Intrusion Detection System (IDS) using Bagged Decision Trees, trained on the NSL-KDD dataset.
 The system is capable of detecting malicious network traffic by analyzing packet data captured using Wireshark from a VirtualBox Ubuntu virtual machine running on a macOS host.
@@ -14,19 +14,23 @@ The workflow includes:
 
 4. Classifying traffic as Normal or Intrusion using MATLAB
 
-## 🧰 Software & System Requirements 
-# 1. Host System
+# 🧰 Software & System Requirements 
+## 1. Host System
 
 macOS / Windows / Linux (tested on macOS)
 
 Minimum 8 GB RAM recommended
 
-# 2. Required Software
-Software	Version (Recommended)
-MATLAB	R2023a or later
-Wireshark	Latest stable version
-Oracle VirtualBox	7.x
-Ubuntu (VM)	Ubuntu 20.04 LTS or later
+## 2. Required Software
+1. Software Version (Recommended)
+
+2. MATLAB R2023a or later
+
+3. Wireshark Latest stable version
+
+4. Oracle VirtualBox	7.x
+
+5. Ubuntu (VM) Ubuntu 20.04 LTS or later
 
 
 # Step 1: Install MATLAB
